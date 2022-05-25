@@ -139,51 +139,53 @@ class ElliptiCurve:
         return temp
 
 
-# 224 не работает
-# p = 0xffffffffffffffffffffffffffffffff000000000000000000000001
-# a = 0xfffffffffffffffffffffffffffffffefffffffffffffffffffffffe
-# b = 0xb4050a850c04b3abf54132565044b0b7d7bfd8ba270b39432355ffb4
-# n = 0xffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
+if __name__ == '__main__':
 
-# 192
-# p = 0xfffffffffffffffffffffffffffffffeffffffffffffffff
-# a = 0xfffffffffffffffffffffffffffffffefffffffffffffffc
-# b = 0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
-# n = 0xffffffffffffffffffffffff99def836146bc9b1b4d22831
+    # 224 не работает
+    # p = 0xffffffffffffffffffffffffffffffff000000000000000000000001
+    # a = 0xfffffffffffffffffffffffffffffffefffffffffffffffffffffffe
+    # b = 0xb4050a850c04b3abf54132565044b0b7d7bfd8ba270b39432355ffb4
+    # n = 0xffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
 
-# 256
-p = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff
-a = 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffc
-b = 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b
-n = 0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551
+    # 192
+    # p = 0xfffffffffffffffffffffffffffffffeffffffffffffffff
+    # a = 0xfffffffffffffffffffffffffffffffefffffffffffffffc
+    # b = 0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
+    # n = 0xffffffffffffffffffffffff99def836146bc9b1b4d22831
 
-ec = ElliptiCurve(p, a, b, n)
+    # 256
+    p = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff
+    a = 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffc
+    b = 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b
+    n = 0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551
 
-# print(ec.is_on_curve(A))
+    ec = ElliptiCurve(p, a, b, n)
 
-# Apr = ec.to_projective(A)
+    # print(ec.is_on_curve(A))
 
-# Adouble = ec.PointDouble(Apr)
-# Aadd = ec.PointAdd(Apr, Apr)
+    # Apr = ec.to_projective(A)
 
-# Aaf = ec.to_affine(Aadd)
+    # Adouble = ec.PointDouble(Apr)
+    # Aadd = ec.PointAdd(Apr, Apr)
 
-# print(Adouble)
-# print(Aadd)
-# print(ec.is_on_curve(Aaf))
+    # Aaf = ec.to_affine(Aadd)
+
+    # print(Adouble)
+    # print(Aadd)
+    # print(ec.is_on_curve(Aaf))
 
 
-B = ec.get_random_aff_point()
+    B = ec.get_random_aff_point()
 
-B = ec.to_projective(B)
+    B = ec.to_projective(B)
 
-Bscal = ec.ScalarMultiplication(n, B)
+    Bscal = ec.ScalarMultiplication(n, B)
 
-print('Bscal')
-print(Bscal)
-print(ec.is_on_curve(Bscal))
-BMont = ec.ScalarMultiplicationMontgomery(n, B)
-print(BMont)
-print(ec.is_on_curve(BMont))
+    print('Bscal')
+    print(Bscal)
+    print(ec.is_on_curve(Bscal))
+    BMont = ec.ScalarMultiplicationMontgomery(n, B)
+    print(BMont)
+    print(ec.is_on_curve(BMont))
 
-print(Bscal == BMont)
+    print(Bscal == BMont)
